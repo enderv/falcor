@@ -7632,7 +7632,8 @@ function isNumber(val) {
     // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
     // subtraction forces infinities to NaN
     // adding 1 corrects loss of precision from parseFloat (#15100)
-    return !isArray(val) && (val - parseFloat(val) + 1) >= 0;
+    // And a check if number will change value if converted to string
+    return !isArray(val) && (val - parseFloat(val) + 1) >= 0 && String(Number(val)) === String(val);
 }
 
 
